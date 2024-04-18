@@ -10,7 +10,7 @@ By default the driver will compile the project with `make`, but other options ca
 ## API
 
 ```kotlin
-val driver = LldbDriver("/usr/bin/lldb")
+val driver = getLldbDriver("/usr/bin/lldb")
 driver.load("path/to/project")
 driver.setBreakpoint("main.c", LINE_NUMBER)
 driver.setBreakpointCallback {
