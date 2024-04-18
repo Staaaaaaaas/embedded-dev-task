@@ -1,3 +1,5 @@
+package com.stas
+
 import com.stas.debuggerdriver.getLldbDriver
 import com.stas.lldberror.LldbError
 import org.junit.jupiter.api.RepeatedTest

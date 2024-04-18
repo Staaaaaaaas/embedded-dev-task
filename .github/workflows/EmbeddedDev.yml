@@ -55,4 +55,4 @@ jobs:
         uses: gradle/wrapper-validation-action@v3.3.1
       - uses: gradle/gradle-build-action@v3.3.1
         with:
-          arguments: test -i --rerun-tasks --tests com.stas.kotlin.DriverTests
+          arguments: test -i --rerun-tasks --tests com.stas.DriverTests
