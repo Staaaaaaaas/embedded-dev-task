@@ -4,7 +4,7 @@ on: [pull_request, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4.1.1
@@ -23,7 +23,7 @@ jobs:
           arguments: build --stacktrace -x test
 
   detekt:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4.1.1
@@ -41,7 +41,7 @@ jobs:
 
   base:
     needs: detekt
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4.1.1
