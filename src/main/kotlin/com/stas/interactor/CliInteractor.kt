@@ -2,7 +2,6 @@
 
 package com.stas.interactor
 
-import com.stas.debuggerdriver.DELAY_DURATION
 import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.BufferedWriter
@@ -26,19 +25,19 @@ internal class CliInteractor : AutoCloseable {
         //errorListener = startErrorListener()
     }
 
-    private fun startErrorListener() = CoroutineScope(Dispatchers.IO).launch {
-        while (process?.isAlive == true) {
-            val line = readErrorLine()
-            if (line != null) {
-                process?.destroy()
-            }
-            delay(DELAY_DURATION)
-        }
-    }
+//    private fun startErrorListener() = CoroutineScope(Dispatchers.IO).launch {
+//        while (process?.isAlive == true) {
+//            val line = readErrorLine()
+//            if (line != null) {
+//                process?.destroy()
+//            }
+//            delay(DELAY_DURATION)
+//        }
+//    }
 
     private fun readLine() = inputStream?.readLine()
 
-    private fun readErrorLine() = errorStream?.readLine()
+//    private fun readErrorLine() = errorStream?.readErrorLine()
 
     fun readUntil(check: (String?) -> Boolean): List<String?> {
         var line: String?
