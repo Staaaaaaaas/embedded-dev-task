@@ -1,2 +1,2 @@
 main: main.c mylib.h
-	gcc -g -o main main.c -I mylib.h
+	gcc-11 -g -o main main.c -I mylib.h
