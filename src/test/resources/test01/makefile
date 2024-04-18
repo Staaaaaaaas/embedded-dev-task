@@ -1,2 +1,2 @@
 main: main.c
-	gcc-11 -g -o main main.c
+	gcc -g3 -o main main.c
