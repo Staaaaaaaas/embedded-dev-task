@@ -57,11 +57,12 @@ class LldbDriver(
         else {
             debugInteractor?.write("br s -f $fileName -l $lineNumber$newline")
             debugInteractor?.readUntil { it.isSetBreakpointLine() }
+            val res = debugInteractor?.readUntil { it.isSetBreakpointLine() }
             if (
-                debugInteractor?.readUntil { it.isSetBreakpointLine() }?.any
+                res?.any
                 { it.isSuccessfulSetBreakpointLine() } == false
             )
-                throw LldbError(Exception("Failed setting the breakpoint"))
+                throw LldbError(Exception("Failed setting the breakpoint: ${res.joinToString (newline)}"))
         }
     }
 
@@ -91,7 +92,7 @@ class LldbDriver(
             debugInteractor?.write("br s -f ${breakpoint.first} -l ${breakpoint.second}$newline")
             val res = debugInteractor?.readUntil { it.isSetBreakpointLine() }
             if (res?.any { it.isSuccessfulSetBreakpointLine() } == false)
-                throw LldbError(Exception("Failed setting the breakpoint"))
+                throw LldbError(Exception("Failed setting the breakpoint: ${res.joinToString (newline)}"))
         }
     }
 
