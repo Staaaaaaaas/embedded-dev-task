@@ -23,14 +23,13 @@ internal class CliInteractor : AutoCloseable {
         outputStream = process?.outputStream?.bufferedWriter()
         errorStream = process?.errorStream?.bufferedReader()
 
-        errorListener = startErrorListener()
+        //errorListener = startErrorListener()
     }
 
     private fun startErrorListener() = CoroutineScope(Dispatchers.IO).launch {
         while (process?.isAlive == true) {
             val line = readErrorLine()
             if (line != null) {
-                println(line)
                 process?.destroy()
             }
             delay(DELAY_DURATION)
