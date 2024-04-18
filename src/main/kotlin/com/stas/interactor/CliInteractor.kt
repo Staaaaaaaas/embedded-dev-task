@@ -1,4 +1,5 @@
 @file:Suppress("WildcardImport")
+
 package com.stas.interactor
 
 import com.stas.debuggerdriver.DELAY_DURATION
@@ -26,14 +27,14 @@ internal class CliInteractor : AutoCloseable {
     }
 
     private fun startErrorListener() = CoroutineScope(Dispatchers.IO).launch {
-            while(process?.isAlive == true) {
-                val line = readErrorLine()
-                if(line != null) {
-                    process?.destroy()
-                }
-                delay(DELAY_DURATION)
+        while (process?.isAlive == true) {
+            val line = readErrorLine()
+            if (line != null) {
+                process?.destroy()
             }
+            delay(DELAY_DURATION)
         }
+    }
 
     private fun readLine() = inputStream?.readLine()
 

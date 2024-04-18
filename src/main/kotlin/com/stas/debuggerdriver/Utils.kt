@@ -1,4 +1,5 @@
 @file:Suppress("TooManyFunctions")
+
 package com.stas.debuggerdriver
 
 import com.stas.interactor.CliInteractor
@@ -28,7 +29,5 @@ fun String.compile(compileCommand: String) =
         interactor.start(this, compileCommand.split(" "))
         interactor.readUntil { it == null }
     }
-
-fun String?.isErrorLine() = this?.startsWith("(lldb)") == true
 
 fun getLldbDriver(pathToDriver: String = "lldb"): DebuggerDriver = LldbDriver(pathToDriver)

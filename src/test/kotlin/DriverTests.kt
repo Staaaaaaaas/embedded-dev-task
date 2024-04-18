@@ -2,7 +2,6 @@ import com.stas.debuggerdriver.getLldbDriver
 import com.stas.lldberror.LldbError
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.assertThrows
-import java.io.IOException
 import kotlin.io.path.Path
 import kotlin.io.path.listDirectoryEntries
 import kotlin.io.path.pathString

@@ -38,12 +38,12 @@ class LldbDriver(
 
 
         debugInteractor.use { interactor ->
-                interactor?.start(projectDirectory, listOf(pathToDebugger, executable))
-                interactor?.readUntil { it.isLldbStartLine() }
-                loadBreakpoints()
-                interactor?.write("run$newline")
-                _isRunning = true
-                debugLoop()
+            interactor?.start(projectDirectory, listOf(pathToDebugger, executable))
+            interactor?.readUntil { it.isLldbStartLine() }
+            loadBreakpoints()
+            interactor?.write("run$newline")
+            _isRunning = true
+            debugLoop()
         }
     } catch (exception: IOException) {
         throw LldbError(exception)

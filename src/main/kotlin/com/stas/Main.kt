@@ -1,8 +1,6 @@
 package com.stas
 
-import com.stas.debuggerdriver.LldbDriver
 import com.stas.debuggerdriver.getLldbDriver
-import com.stas.interactor.CliInteractor
 
 const val LINE_NUMBER = 3
 
