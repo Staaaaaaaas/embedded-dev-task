@@ -35,18 +35,19 @@ internal class DriverTests {
             it.pathString
         }
         toLoad.forEach {
-            if(it.endsWith("test03")) return
-            val driver = getLldbDriver()
-            driver.load(it)
-            assertTrue(driver.isLoaded)
-            assertFalse(driver.isRunning)
-            driver.setBreakpoint("main.c", 3)
-            driver.setBreakpointCallback {
-                assertTrue(driver.isRunning)
-                driver.resume()
+            if (!it.endsWith("test03")) {
+                val driver = getLldbDriver()
+                driver.load(it)
+                assertTrue(driver.isLoaded)
+                assertFalse(driver.isRunning)
+                driver.setBreakpoint("main.c", 3)
+                driver.setBreakpointCallback {
+                    assertTrue(driver.isRunning)
+                    driver.resume()
+                }
+                driver.run()
+                assertFalse(driver.isRunning)
             }
-            driver.run()
-            assertFalse(driver.isRunning)
         }
     }
 
