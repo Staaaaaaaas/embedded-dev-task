@@ -40,7 +40,6 @@ jobs:
 #          arguments: detekt --stacktrace
 
   base:
-    needs: detekt
     runs-on: ubuntu-latest
 
     steps:
