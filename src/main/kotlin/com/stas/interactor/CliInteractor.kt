@@ -30,8 +30,7 @@ internal class CliInteractor : AutoCloseable {
         while (process?.isAlive == true) {
             val line = readErrorLine()
             if (line != null) {
-//                process?.destroy()
-                break
+                process?.destroy()
             }
             delay(DELAY_DURATION)
         }

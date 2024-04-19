@@ -102,13 +102,13 @@ internal class DriverTests {
         }
     }
 
-//    @RepeatedTest(10)
-//    fun noExecutable() {
-//        val driver = getLldbDriver()
-//        val path = "src/test/resources/test03"
-//        driver.load(path)
-//        assertThrows<LldbError> {
-//            driver.run()
-//        }
-//    }
+    @RepeatedTest(10)
+    fun noExecutable() {
+        val driver = getLldbDriver()
+        val path = "src/test/resources/test03"
+        driver.load(path)
+        assertThrows<LldbError> {
+            driver.run()
+        }
+    }
 }
