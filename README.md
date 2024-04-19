@@ -1,3 +1,4 @@
+[![Build](https://github.com/Staaaaaaaas/embedded-dev-task/actions/workflows/EmbeddedDev.yml/badge.svg)](https://github.com/Staaaaaaaas/embedded-dev-task/actions/workflows/EmbeddedDev.yml)
 # LLDB debugger
 
 This is a part of my application for Embedded Development Support internship project. The requirement was to implement a toy class for debugging C programs. This implementation uses LLDB debugger.
