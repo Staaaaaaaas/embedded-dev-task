@@ -32,7 +32,9 @@ class LldbDriver(
 
     override fun run() = try {
         check(isLoaded) { "Attempted to call `run` before `load`." }
-        projectDirectory.compile(compileCommand)
+        val res = projectDirectory.compile(compileCommand)
+
+        if(res.isNotEmpty()) throw Error(res.joinToString(newline))
 
         debugInteractor = CliInteractor()
 

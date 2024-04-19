@@ -24,10 +24,13 @@ fun String?.isResumeLine() = this?.startsWith("Process") == true
 
 fun String?.isLastBacktraceLine() = this?.contains("dyld`start") == true
 
-fun String.compile(compileCommand: String) =
+fun String.compile(compileCommand: String): List<String?> {
+    val res: List<String?>
     CliInteractor().use { interactor ->
         interactor.start(this, compileCommand.split(" "))
-        interactor.readUntil { it == null }
+        res = interactor.readUntil { it == null }
     }
+    return res
+}
 
 fun getLldbDriver(pathToDriver: String = "lldb"): DebuggerDriver = LldbDriver(pathToDriver)

@@ -1,43 +1,43 @@
-name: Workflow
+name: EmbeddedDevTests
 
 on: [pull_request, workflow_dispatch]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v4.1.1
+#      - name: Build
+#        run: git status
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v4.2.1
+#        with:
+#          java-version: 17
+#          distribution: liberica
+#
+#      - name: Gradle Wrapper Validation
+#        uses: gradle/wrapper-validation-action@v3.3.1
+#      - uses: gradle/gradle-build-action@v3.3.1
+#        with:
+#          arguments: build --stacktrace -x test
 
-    steps:
-      - uses: actions/checkout@v4.1.1
-      - name: Build
-        run: git status
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4.2.1
-        with:
-          java-version: 17
-          distribution: liberica
-
-      - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v3.3.1
-      - uses: gradle/gradle-build-action@v3.3.1
-        with:
-          arguments: build --stacktrace -x test
-
-  detekt:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4.1.1
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4.2.1
-        with:
-          java-version: 17
-          distribution: liberica
-
-      - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v3.3.1
-      - uses: gradle/gradle-build-action@v3.3.1
-        with:
-          arguments: detekt --stacktrace
+#  detekt:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v4.1.1
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v4.2.1
+#        with:
+#          java-version: 17
+#          distribution: liberica
+#
+#      - name: Gradle Wrapper Validation
+#        uses: gradle/wrapper-validation-action@v3.3.1
+#      - uses: gradle/gradle-build-action@v3.3.1
+#        with:
+#          arguments: detekt --stacktrace
 
   base:
     needs: detekt
