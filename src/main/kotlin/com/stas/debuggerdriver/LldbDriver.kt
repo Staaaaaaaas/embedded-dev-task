@@ -108,7 +108,6 @@ class LldbDriver(
                 break
             }
             paused = true
-            throw Error(res?.joinToString(newline))
             breakpointCallback()
         }
     }

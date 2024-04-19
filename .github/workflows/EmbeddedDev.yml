@@ -40,7 +40,7 @@ jobs:
 #          arguments: detekt --stacktrace
 
   base:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
 
@@ -50,8 +50,6 @@ jobs:
         with:
           java-version: 17
           distribution: liberica
-      - name: LLDB download
-        run: sudo apt install lldb
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v3.3.1
       - uses: gradle/gradle-build-action@v3.3.1
