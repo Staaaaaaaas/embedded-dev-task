@@ -51,35 +51,26 @@ class LldbDriver(
 
     override fun setBreakpoint(fileName: String, lineNumber: Int) {
         check(isLoaded) { "Cannot set breakpoint before loading the driver" }
+        check(!isRunning) { "Cannot set breakpoint after running the driver" }
         require(File(_projectDirectory, fileName).exists()) { "File not found in the project directory" }
         if (!_isRunning) breakpointLines.add(fileName to lineNumber)
-        else {
-            debugInteractor?.write("br s -f $fileName -l $lineNumber$newline")
-            debugInteractor?.readUntil { it.isSetBreakpointLine() }
-            val res = debugInteractor?.readUntil { it.isSetBreakpointLine() }
-            if (
-                res?.any
-                { it.isSuccessfulSetBreakpointLine() } == false
-            )
-                throw LldbError(Exception("Failed setting the breakpoint: ${res.joinToString (newline)}"))
-        }
     }
 
     override fun resume() {
-        check(isRunning) { "Cannot call `resume`, the driver is not running" }
+        check(isRunning) { "Cannot resume, the driver is not running" }
         debugInteractor?.write("continue$newline")
         debugInteractor?.readUntil { it.isResumeLine() }
         paused = false
     }
 
     override fun setBreakpointCallback(callback: () -> Unit) {
-        check(isLoaded) { "Attempted to set breakpoint callback before loading the driver" }
-        check(!isRunning) { "Attempted to change the breakpoint callback after running the driver" }
+        check(isLoaded) { "Cannot set breakpoint callback before loading the driver" }
+        check(!isRunning) { "Cannot set breakpoint callback after running the driver" }
         breakpointCallback = callback
     }
 
     override fun getBacktrace(): String {
-        check(isRunning) { "Cannot get backtrace, the driver is not running" }
+        check(isRunning) { "Cannot get backtrace before running the driver" }
         check(paused) { "Cannot get backtrace, the driver is not paused" }
         debugInteractor?.write("thread backtrace all$newline")
         val res = debugInteractor?.readUntil { it.isLastBacktraceLine() }

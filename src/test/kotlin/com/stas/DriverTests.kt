@@ -19,6 +19,21 @@ internal class DriverTests {
         assertThrows<IllegalStateException> { driver.run() }
         assertThrows<IllegalStateException> { driver.resume() }
         assertThrows<IllegalStateException> { driver.getBacktrace() }
+        val path = "src/test/resources/test01"
+        driver.load(path)
+        driver.setBreakpoint("main.c", 3)
+        driver.setBreakpointCallback {
+            assertTrue(driver.isRunning)
+            println(driver.getBacktrace())
+            assertThrows<IllegalStateException> {
+                driver.setBreakpoint("main.c", 5)
+            }
+            assertThrows<IllegalStateException> {
+                driver.setBreakpointCallback { driver.resume() }
+            }
+            driver.resume()
+        }
+        driver.run()
     }
 
     @Test
@@ -43,6 +58,7 @@ internal class DriverTests {
                 driver.setBreakpoint("main.c", 3)
                 driver.setBreakpointCallback {
                     assertTrue(driver.isRunning)
+                    println(driver.getBacktrace())
                     driver.resume()
                 }
                 driver.run()
@@ -66,6 +82,17 @@ internal class DriverTests {
         }
         driver.run()
         assertEquals(6, cnt)
+    }
+
+    @Test
+    fun getBacktraceNotRunning() {
+        val driver = getLldbDriver()
+        val path = "src/test/resources/test01"
+        driver.load(path)
+        assertTrue(driver.isLoaded)
+        assertThrows<IllegalStateException> {
+            driver.getBacktrace()
+        }
     }
 
     @Test
