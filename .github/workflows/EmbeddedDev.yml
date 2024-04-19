@@ -52,8 +52,6 @@ jobs:
           distribution: liberica
       - name: LLDB download
         run: sudo apt install lldb
-      - name: GCC download
-        run: sudo apt install gcc
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v3.3.1
       - uses: gradle/gradle-build-action@v3.3.1

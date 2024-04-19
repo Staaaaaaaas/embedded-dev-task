@@ -40,7 +40,6 @@ class LldbDriver(
             interactor?.start(projectDirectory, listOf(pathToDebugger, executable))
             interactor?.readUntil { it.isLldbStartLine() }
             loadBreakpoints()
-            throw Error()
             interactor?.write("run$newline")
             _isRunning = true
             debugLoop()
@@ -109,6 +108,7 @@ class LldbDriver(
                 break
             }
             paused = true
+            throw Error(res?.joinToString(newline))
             breakpointCallback()
         }
     }
