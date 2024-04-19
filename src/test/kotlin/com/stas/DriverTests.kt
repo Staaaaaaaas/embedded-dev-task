@@ -52,12 +52,12 @@ internal class DriverTests {
     }
 
     @Test
-    fun forLoopTest() {
+    fun recursionTest() {
         val driver = getLldbDriver()
         val path = "src/test/resources/test01"
         driver.load(path)
         assertTrue(driver.isLoaded)
-        driver.setBreakpoint("main.c", 11)
+        driver.setBreakpoint("main.c", 3)
         var cnt = 0
         driver.setBreakpointCallback {
             assertTrue(driver.isRunning)
@@ -65,7 +65,7 @@ internal class DriverTests {
             driver.resume()
         }
         driver.run()
-        assertEquals(5, cnt)
+        assertEquals(6, cnt)
     }
 
     @Test

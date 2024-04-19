@@ -1,13 +1,12 @@
 #include <stdio.h>
 
-int fib(int x) {
+int fact(int x) {
     if(x == 0) return 1;
-    if(x == 1) return 1;
-    return fib(x - 1) + fib(x - 2);
+    return x*fact(x-1);
 }
 int main() {
-    for(int i=0; i < 5; i++){
-        printf("%d", fib(i));
-    }
+
+    printf("%d", fact(5));
+
     return 0;
 }
